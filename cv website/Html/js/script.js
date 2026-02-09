@@ -64,6 +64,7 @@ function checkDate(){
 
 function showConfirmation(event) {
   event.preventDefault(); // stops the form from submitting immediately
+  let form = document.getElementById("submit");
   
   
   if (!validateForm()) {
@@ -71,75 +72,79 @@ function showConfirmation(event) {
   }
   
   // Get the form values for the confirmation popup
-  const fullname = document.querySelector('input[name="fullname"]').value;
-  const email = document.querySelector('input[name="email"]').value;
-  const phone = document.querySelector('input[name="phonenumber"]').value;
+  let fullname = form.fullname.value;
+  let email = form.email.value;
+  let phone = form.phonenumber.value;
   
   // Gets the radio button value for contact preference
-  const contactRadio = document.querySelector('input[name="rdo"]:checked');
-  const contactPref = contactRadio ? contactRadio.value : 'Not specified';
+  let contactRadio = form.rdo;
+  let contactPref = 'Not specified';
+  for (let i = 0; i < contactRadio.length; i++) {
+    if (contactRadio[i].checked) {
+      contactPref = contactRadio[i].value;
+      break;
+    }
+  }
   
   // Gets the textarea value
-  const enquiry = document.querySelector('textarea[name="user-input"]').value;
+  let enquiry = form["user-input"].value;
   
   // Gets the date and duration
-  const startDateInput = document.querySelector('input[name="start_date"]');
-  const startDate = startDateInput ? startDateInput.value : '';
-  const duration = document.querySelector('input[name="duration"]').value;
+  const startDateInput = form.start_date.value;
+  let startDate = '';
+  if (startDateInput) {
+    startDate = startDateInput.value;
+  }
+ let duration = form.duration.value;
   
   // Formats the date for display
-  let displayDate = startDate;
+  let showDate = startDate;
   if (startDate) {
     try {
-      const dateObj = new Date(startDate);
-      displayDate = dateObj.toLocaleDateString('en-GB', {
+      let dateObj = new Date(startDate);
+      showDate = dateObj.toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long',
         year: 'numeric'
       });
     } catch (e) {
-      displayDate = startDate; // Use raw value if formatting fails
+      displayDate = startDate; // Uses the raw value if formatting fails
     }
   } else {
     displayDate = 'Not specified';
   }
   
-  // Truncate long enquiry for the popup
-  let displayEnquiry = enquiry;
-  if (enquiry && enquiry.length > 100) {
-    displayEnquiry = enquiry.substring(0, 100) + '...';
+  // Makes the enquiry text about 150 characters for the confirmation popup and checks if theres nothing in the text area
+  let showEnquiry = enquiry;
+  if (enquiry && enquiry.length > 150) {
+    showEnquiry = enquiry.substring(0, 150) + '...';
   } else if (!enquiry || !enquiry.trim()) {
-    displayEnquiry = 'Not provided';
+    showEnquiry = 'Not provided';
   }
   
-  // Create confirmation message with your email
-  const message = `📋 COMMISSION REQUEST SUMMARY\n
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-TO: 240233187@aston.ac.uk (Takunda Mudzinganyama)
+  // Creates confirmation message with my email
+  let message = "COMMISSION REQUEST\n\n" +
+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n" +
+"TO: 240233187@aston.ac.uk (Takunda Mudzinganyama)\n\n" +
+"FROM: " + (fullname || 'Not provided') + "\n" +
+"EMAIL: " + (email || 'Not provided') + "\n" +
+"PHONE: " + (phone || 'Not provided') + "\n\n" +
+"How to contact you: " + contactPref + "\n\n" +
+"Specific enquiry:\n" + showEnquiry + "\n\n" +
+"Timeline:\n" +
+"Start Date: " + showDate + "\n" +
+"Duration: " + (duration || 'Not specified') + " days\n" +
+"━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n" +
+"Send this commission\n" +
+"Click OK to send.";
 
-FROM: ${fullname || 'Not provided'}
-EMAIL: ${email || 'Not provided'}
-PHONE: ${phone || 'Not provided'}
-
-CONTACT PREFERENCE: ${contactPref}
-
-ENQUIRY:
-${displayEnquiry}
-
-TIMELINE:
-Start Date: ${displayDate}
-Duration: ${duration || 'Not specified'} days
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Send this commission request to Takunda?
-Click OK to send, Cancel to review.`;
   
-  // Show confirmation popup
-  const userConfirmed = confirm(message);
+  // Shows the confirmation popup
+  let userConfirmed = confirm(message);
   
   if (userConfirmed) {
     // User confirmed - submit the form normally
-    // Your form action will handle the submission
+    // The form action will handle the submission
     return true;
   } else {
     // User cancelled - don't submit
