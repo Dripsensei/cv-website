@@ -63,32 +63,31 @@ function checkDate(){
 }
 
 function showConfirmation(event) {
-  event.preventDefault(); // Prevent form from submitting immediately
+  event.preventDefault(); // stops the form from submitting immediately
   
-  // First, run your existing validation
-  // This will call checkEmails() and checkDate() internally
+  
   if (!validateForm()) {
-    return false; // Stop if validation fails (shows your existing error messages)
+    return false; // Stops if the validation fails 
   }
   
-  // Get form values for the confirmation popup
+  // Get the form values for the confirmation popup
   const fullname = document.querySelector('input[name="fullname"]').value;
   const email = document.querySelector('input[name="email"]').value;
   const phone = document.querySelector('input[name="phonenumber"]').value;
   
-  // Get radio button value for contact preference
+  // Gets the radio button value for contact preference
   const contactRadio = document.querySelector('input[name="rdo"]:checked');
   const contactPref = contactRadio ? contactRadio.value : 'Not specified';
   
-  // Get textarea value
+  // Gets the textarea value
   const enquiry = document.querySelector('textarea[name="user-input"]').value;
   
-  // Get date and duration
+  // Gets the date and duration
   const startDateInput = document.querySelector('input[name="start_date"]');
   const startDate = startDateInput ? startDateInput.value : '';
   const duration = document.querySelector('input[name="duration"]').value;
   
-  // Format the date for display
+  // Formats the date for display
   let displayDate = startDate;
   if (startDate) {
     try {
