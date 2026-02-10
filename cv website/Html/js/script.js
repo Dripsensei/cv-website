@@ -36,7 +36,7 @@ function checkDate(){
    let form = document.getElementById("submit"); 
    let startDateValue = form.start_date.value;
    let durationValue = form.duration.value;
-
+// Checks wether the 2 values are empty
    if (startDateValue === ""  ||  durationValue === ""){
     alert("Please select a start date and duration");
     return false;
