@@ -48,6 +48,12 @@ main {
 #skills {
     grid-area: skills;
 }
+#skills img {
+    width: 20px;        /* Small width */
+    height: 20px;       /* Small height */
+    margin-right: 8px;  /* Space between image and text */
+    vertical-align: middle; /* Align with text */
+}
 
 #interests {
     grid-area: interests;
