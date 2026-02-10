@@ -1,13 +1,13 @@
 window.onload = function () {
     console.log("Hello from Javascript")
 
-    let form = document.getElementById("submit");
+    let form = document.getElementById("submit"); // gets the things in the form 
     let email_pass1 = form.email;
     let email_pass2 = form.confirm_email;
 
 }
 
-
+// Basically checks if the email and date are valid and then they can submit the form
 function validateForm(){
     if (!checkEmails()){
         return false
@@ -27,7 +27,7 @@ function checkEmails(){
     if(email_pass1.value !== email_pass2.value){
         alert("Emails do not match ");
         return false
-    }
+    } // Checks if the emails match each other
     return true;
 
 }
@@ -63,7 +63,7 @@ function checkDate(){
 }
 
 function showConfirmation(event) {
-  event.preventDefault(); // stops the form from submitting immediately
+  event.preventDefault(); // stops the form from submitting so we can show the pop up first
   let form = document.getElementById("submit");
   
   
@@ -71,7 +71,7 @@ function showConfirmation(event) {
     return false; // Stops if the validation fails 
   }
   
-  // Get the form values for the confirmation popup
+  // Gets the form values for the confirmation popup
   let fullname = form.fullname.value;
   let email = form.email.value;
   let phone = form.phonenumber.value;
@@ -108,13 +108,13 @@ function showConfirmation(event) {
         year: 'numeric'
       });
     } catch (e) {
-      displayDate = startDate; // Uses the raw value if formatting fails
+      displayDate = startDate; // Uses the startDate value if formatting fails
     }
   } else {
     displayDate = 'Not specified';
   }
   
-  // Makes the enquiry text about 150 characters for the confirmation popup and checks if theres nothing in the text area
+  // Makes the input text 150 characters for the confirmation popup and checks if theres nothing in the text area
   let showEnquiry = enquiry;
   if (enquiry && enquiry.length > 150) {
     showEnquiry = enquiry.substring(0, 150) + '...';

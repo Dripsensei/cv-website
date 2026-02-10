@@ -1,3 +1,7 @@
+body {
+    background-color: #e09a9a !important; /* adds some background colour to the website */
+}
+
 h2 {
     font-family: Arial, Helvetica, sans-serif;
     color: #0c0000;
@@ -6,25 +10,25 @@ h2 {
 #main-header {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; /* this is what makes my name and the links on opposite sides on the header */
     width: 100%;
     align-items: center;
     margin: 0 auto;
 }
 
 #main-header nav ul {
-    display: flex;           /* Makes list items horizontal */
-    list-style: none;        /* Removes bullet points */
-    padding: 0;              /* Removes default padding */
-    margin: 0;               /* Removes default margin */
-    gap: 20px;               /* Space between links */
+    display: flex;           /* Made the list with the html files and other external links horizontal */
+    list-style: none;        /* this removed the bulletpoints from the list */
+    padding: 0;             
+    margin: 0;              
+    gap: 20px;               /* the amount of space between the list items */
 }
 
 
 main {
     display: grid !important;
-    grid-template-columns: 30% 70% !important;
-    grid-template-areas:
+    grid-template-columns: 30% 70% !important; /* this is the percentage of each column*/
+    grid-template-areas:  /* this is what was used to visualy structure the website*/
         "about work"
         "about education"
         "about skills"
@@ -32,7 +36,7 @@ main {
     gap: 30px;
     align-items: start;
 }
-
+/* this just plotts the sections of the website in the grid template areas */
 #About\me{
     grid-area: about;
 }
@@ -49,10 +53,10 @@ main {
     grid-area: skills;
 }
 #skills img {
-    width: 20px;        /* Small width */
-    height: 20px;       /* Small height */
-    margin-right: 8px;  /* Space between image and text */
-    vertical-align: middle; /* Align with text */
+    width: 20px;        
+    height: 20px;       
+    margin-right: 8px;  /* This was how much space there is between the logos and the text */
+    vertical-align: middle; /* Align the image with the text */
 }
 
 #interests {
